@@ -1,0 +1,17 @@
+images/*
+*.swp
+*.DS_Store
+*.zip
+*.jpg
+*.doc
+*.docx
+*.pdf
+*.JPG
+*.xls
+*.swf
+*.flv
+*.mov
+*.psd
+*.jpeg
+*.mp4
+*.avi

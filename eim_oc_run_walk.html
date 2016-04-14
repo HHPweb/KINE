@@ -1,0 +1,156 @@
+<script type="text/javascript">
+$.support.cors = true; //may be required to get CORS support from JQuery with some browsers
+	$( document ).ready( function() {
+			$( "#formDiv" ).css( "visibility", "visible" );
+			$( ".jsWarning" ).css( "display", "none" );
+			$( "#runForm" ).submit( function( event ) {
+				event.preventDefault();
+				//validation
+				var validated = true;
+				var afil = $( "input[name=afil]:checked" ).length;
+				var type = $( "input[name=type]:checked" ).length;
+				if( afil < 1 ) {
+					alert( "Please indicate your University affiliation." );
+					return false;
+				}
+				if( type < 1 ) {
+					alert( "Please select your Run or Walk preference." );
+					return false;
+				}
+				if( $( "#first" ).val().length < 1 ) {
+					alert( "Please enter your first name." );
+					$( "#first" ).focus();
+					return false;
+				}
+				if( $( "#last" ).val().length < 1 ) {
+					alert( "Please enter your last name." );
+					$( "#last" ).focus();
+					return false;
+				}
+				if( $( "#email" ).val().length < 7 ) {
+					alert( "Please enter a valid email address." );
+					$( "#email" ).focus();
+					return false;
+				}
+				if( $( "#email" ).val() != $( "#email2" ).val() ) {
+					alert( "Email fields must match." );
+					$( "#email2" ).focus();
+					return false;
+				}
+				//end validation - begin ajax
+				var formData = $( "#runForm" ).serializeArray();
+				$.post( "https://www2.ecu.edu/hhp/eimoc/reg.cfm", formData, function( data ) {
+					var resp = $.trim( data );
+					if( resp == "Success" ) {
+						$( "#formDiv" ).load( "https://www2.ecu.edu/hhp/eimoc/thanks.cfm");
+					}else {
+						alert( "There was an error and your registration was not recorded.");
+					}
+				} )
+			} );
+
+	} );
+
+</script>
+
+<style>
+	.jsWarning {
+		color: red;
+	}
+	#formDiv {
+		visibility: hidden;
+	}
+	#formDiv div {
+		padding: 5px 5px 30px 5px;
+	}
+
+	.lblDiv {
+		width: 25%;
+		float: left;
+		text-align: right;
+	}
+	.lblDiv label {
+		line-height: 30px;
+		padding-right: 10px;
+		font-weight: bold;
+	}
+	
+	.nputDiv {
+		width: 70%;
+		float: left;
+	}
+	
+	.nputDiv input {
+		vertical-align: baseline;
+	}
+	
+	#subDiv {
+		text-align: center;
+	}
+
+</style>
+<div class="mainCnt">
+	<h3 class="contentHeading">EIM-OC ANNUAL 3-MILE FUN RUN/WALK Registration</h3>
+
+	<h3 class="jsWarning">Javascript must be enabled to view this form!</h3>
+	<div id="formDiv">
+		<form id="runForm" name="runForm" method="post">
+			<div class="lblDiv">
+				<label for="first">First Name:</label>
+				<label for="last">Last Name:</label>
+			</div> <!-- end lblDiv -->
+
+			<div class="nputDiv">
+				<input type="text" id="first" name="first">
+				<input type="text" id="last" name="last">
+			</div> <!-- end nputDiv -->
+			
+			<div class="lblDiv">
+				<label>University affiliation:</label>
+			</div> <!-- end lblDiv -->
+			
+			<div class="nputDiv">
+				<label><input type="radio" name="afil" value="0"> Student</label>
+				<label><input type="radio" name="afil" value="1"> Faculty/Staff</label>
+				<label><input type="radio" name="afil" value="2"> ECU Alumni</label>
+				<label><input type="radio" name="afil" value="3"> Other</label>
+			</div> <!-- end nputDiv -->
+			
+			<div class="lblDiv">
+				<label for="email">Email:</label>
+				<label for="email2">Confirm Email:</label>
+			</div> <!-- end lblDiv -->
+			
+			<div class="nputDiv">
+				<input type="text" id="email" name="email">
+				<input type="text" id="email2" name="email2">
+			</div> <!-- end nputDiv -->
+			
+			<div class="lblDiv">
+				<label>Walk or Run:</label>
+			</div> <!-- end lblDiv -->
+			
+			<div class="nputDiv">
+				<label><input type="radio" name="type" value="0"> Run</label>
+				<label><input type="radio" name="type" value="1"> Walk</label>
+			</div> <!-- end nputDiv -->
+			 
+			<div id="subDiv">
+				<input type="submit" name="subBtn" id="subBtn" value="Register">
+			</div>
+
+		</form>
+
+		<h3>Rules</h3>
+
+		<ol>
+			<li>Dogs are not allowed at the event</li>
+			<li>One raffle entry per person is allowed</li>
+			<li>To be eligible for the raffle drawing items, you must be present</li>
+		</ol>
+	</div>
+
+
+	
+</div>
+<!--end mainCnt-->
