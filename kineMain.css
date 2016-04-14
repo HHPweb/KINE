@@ -24,18 +24,25 @@ a {
 	clear: both;
 }
 
-.noBullet ul {
+.noBullet {
 	list-style-type: none;
+}
+
+.noBullet > li {
+	line-height: 2;
 }
 
 .leftCol {
 	float: left;
 	max-width: 50%;
+	min-width: 45%;
+	padding-right: 10px;
 }
 
 .rightCol {
 	float: right;
 	max-width: 50%;
+	min-width: 40%;
 }
 
 .HHPheadTxt {
