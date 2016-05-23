@@ -4,6 +4,14 @@ a {
 #hhpCenter {
 	padding: 3px;
 }
+.centered {
+	text-align: center;
+}
+
+.cntr_img{
+	display: block;
+	margin: 3px auto;
+}
 
 .namePlate {
 	font-weight: bold;
